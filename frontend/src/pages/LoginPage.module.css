@@ -1,0 +1,38 @@
+.container {
+  margin: 7rem auto 0;
+  width: 60%;
+  border: 4px solid black;
+  padding: 5rem 1rem;
+}
+
+.inputWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  height: 2rem;
+  outline: none;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+}
+
+.btnWrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  width: 45%;
+  text-align: center;
+  border: 2px solid black;
+  font-weight: bold;
+  font-size: 1.3rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+}

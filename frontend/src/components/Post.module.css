@@ -1,0 +1,26 @@
+.container {
+  display: block;
+  text-decoration: none;
+  width: 60%;
+  border-bottom: 1px solid gray;
+}
+
+.wrap1 {
+  color: black;
+}
+
+.content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wrap2 {
+  display: flex;
+  justify-content: flex-start;
+  color: black;
+}
+
+.author {
+  margin-right: 10px;
+}

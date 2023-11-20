@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.h1 {
+  width: 80%;
+  text-align: center;
+  font-size: 4rem;
+}
+
+.button {
+  text-decoration: none;
+  width: 70px;
+  height: 25px;
+  margin-bottom: 1rem;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 2px solid black;
+  text-align: center;
+  font-weight: bold;
+  color: black;
+}
+
+.button:hover {
+  color: white;
+  background-color: black;
+}
+
+.text {
+  font-size: 1.5rem;
+}
+
+.text2 {
+  text-decoration: line-through;
+}

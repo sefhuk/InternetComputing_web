@@ -1,5 +1,6 @@
 const { response } = require('express');
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const connection = require('../db');
 const router = express.Router();
 require('dotenv').config();
@@ -19,7 +20,6 @@ router.post('/register', (req, res) => {
             if (result) {
               res.send({ status: 'success' });
             }
-
             if (err) {
               res.send({ status: 'failed' });
             }
@@ -39,7 +39,10 @@ router.post('/login', (req, res) => {
       if (result.length === 0 || err) {
         res.send({ status: 'failed' });
       } else {
-        res.send({ status: 'success', name: result[0].name });
+        const accessToken = jwt.sign({ id: id }, 'JWT_SECRET_KEY', {
+          expiresIn: '30m',
+        });
+        res.send({ status: 'success', token: accessToken });
       }
     }
   );

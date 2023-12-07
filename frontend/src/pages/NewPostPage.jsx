@@ -23,19 +23,35 @@ const NewPostPage = () => {
       return;
     }
 
-    if (Session.get('user')) {
-      const result = await axios.post(`${process.env.REACT_APP_API_URL}/post`, {
-        title: title,
-        content: content,
-        author: Session.get('user'),
-      });
+    if (window.sessionStorage.getItem('user')) {
+      const result = await axios.post(
+        `${process.env.REACT_APP_API_URL}/post`,
+        {
+          title: title,
+          content: content,
+          author: window.sessionStorage.getItem('user'),
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: window.sessionStorage.getItem(
+              `${window.sessionStorage.getItem('user')}_token`
+            ),
+            fuck: 'fcccc',
+          },
+        }
+      );
 
       if (result.data.status === 'success') {
         navigate('/');
+      } else if (result.data.status === 'token expired') {
+        alert('토큰 만료로 인해 재 로그인이 필요합니다');
+        window.sessionStorage.removeItem(
+          `${window.sessionStorage.getItem('user')}_token`
+        );
+        window.sessionStorage.removeItem('user');
+        navigate('/auth/login');
       }
-    } else {
-      alert('세션 종료로 인해 로그인이 필요합니다');
-      navigate('/auth/login');
     }
   };
 

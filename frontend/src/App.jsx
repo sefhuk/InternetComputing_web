@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import style from './App.module.css';
 import PostList from './components/PostList';
 import { useEffect, useState } from 'react';
@@ -19,9 +19,10 @@ function App() {
   };
 
   useEffect(() => {
-    if (Session.get('user')) {
-      console.log(Session.get('user'));
-      setUser(Session.get('user'));
+    // if (Session.get('user')) {
+    if (window.sessionStorage.getItem('user')) {
+      // setUser(Session.get('user'));
+      setUser(window.sessionStorage.getItem('user'));
     }
   });
 

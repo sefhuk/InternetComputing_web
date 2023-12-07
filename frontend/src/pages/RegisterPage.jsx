@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import style from './RegisterPage.module.css';
 import { useState } from 'react';
 import axios from 'axios';

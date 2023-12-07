@@ -2,8 +2,11 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import style from './PostPage.module.css';
+import { useRef } from 'react';
+import Session from 'react-session-api';
 
 const PostPage = () => {
+  const authorRef = useRef();
   const navigate = useNavigate();
   const params = useParams();
 
@@ -17,7 +20,13 @@ const PostPage = () => {
   const { data: post, isLoading } = useQuery('post', getPost);
 
   const handleEdit = () => {
-    navigate('edit', { state: post });
+    // if (post.data.author === Session.get('user')) {
+    if (post.data.author === window.sessionStorage.getItem('user')) {
+      navigate('edit', { state: post });
+    } else {
+      alert('본인의 게시물만 수정이 가능합니다.');
+      return;
+    }
   };
 
   if (isLoading) {
@@ -31,7 +40,9 @@ const PostPage = () => {
   return (
     <div className={style.container}>
       <h1 className={style.title}>{post.data.title}</h1>
-      <p className={style.author}>작성자 : {post.data.author}</p>
+      <p className={style.author} ref={authorRef}>
+        작성자 : {post.data.author}
+      </p>
       <p className={style.content}>{post.data.content}</p>
       <div className={style.btnContainer}>
         <Link className={`${style.button} ${style.back}`} to={'/'}>

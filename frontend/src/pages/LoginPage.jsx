@@ -28,7 +28,8 @@ const LoginPage = () => {
     );
 
     if (result.data.status === 'success') {
-      Session.set('user', result.data.name);
+      window.sessionStorage.setItem('user', id);
+      window.sessionStorage.setItem(`${id}_token`, result.data.token);
       navigate('/');
     } else {
       alert('실패');

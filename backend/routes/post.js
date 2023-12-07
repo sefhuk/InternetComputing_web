@@ -1,6 +1,7 @@
 const express = require('express');
 const connection = require('../db');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 router.get('/', (req, res) => {
@@ -17,7 +18,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  const { authorization: token } = req.headers;
   const { title, content, author } = req.body;
+  let docode;
+  try {
+    docode = jwt.verify(token, 'JWT_SECRET_KEY');
+  } catch (e) {
+    res.send({ status: 'token expired' });
+    return;
+  }
 
   connection.query(
     `INSERT INTO posts (title, content, author) VALUES ('${title}', '${content}', '${author}')`,
@@ -25,6 +34,7 @@ router.post('/', (req, res) => {
       if (result) {
         res.send({ status: 'success' });
       } else if (err) {
+        console.log(err);
         res.send({ status: 'failed' });
       }
     }
